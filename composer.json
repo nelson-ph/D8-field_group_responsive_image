@@ -1,0 +1,19 @@
+{
+  "name": "nelson-ph/field_group_responsive_image",
+  "type": "drupal-module",
+  "description": "Field group responsive image",
+  "keywords": [
+    "Drupal"
+  ],
+  "homepage": "https://github.com/nelson-ph/D8-field_group_responsive_image",
+  "require": {
+    "drupal/field_group": "^3"
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Nelson PIRES HASSANALI",
+      "email": "nelson.hassanali@gmail.com"
+    }
+  ]
+}
