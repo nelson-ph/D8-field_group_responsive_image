@@ -91,6 +91,10 @@ class ResponsiveImage extends FieldGroupFormatterBase {
         ];
       }
 
+      if ($this->getSetting('force_picture') && $element['picture']['#context']['output_image_tag']) {
+        $element['picture']['#context']['output_image_tag'] = FALSE;
+      }
+
     }
 
     $element['#attributes'] = $attributes;
@@ -260,8 +264,8 @@ class ResponsiveImage extends FieldGroupFormatterBase {
         }
       }
 
-      $key                    = 'image_fallback';
-      $form[$key]             = [
+      $key        = 'image_fallback';
+      $form[$key] = [
         '#title'         => $this->t('Fallback Image'),
         '#type'          => 'select',
         '#options'       => [
@@ -270,7 +274,16 @@ class ResponsiveImage extends FieldGroupFormatterBase {
         '#default_value' => $this->getSetting($key),
         '#weight'        => 1,
       ];
+
       $form[$key]['#options'] += $imageFields;
+
+      $form['force_picture'] = [
+        '#title'         => $this->t('Force picture'),
+        '#description'   => $this->t('Renders as picture no matter what.'),
+        '#type'          => 'checkbox',
+        '#default_value' => !empty($this->options['force_picture']),
+        '#weight'        => 2,
+      ];
 
     }
 
@@ -332,6 +345,10 @@ class ResponsiveImage extends FieldGroupFormatterBase {
 
     if ($image = $this->getSetting('image_fallback')) {
       $summary[] = $this->t('Image fallback: @image', ['@image' => $imageFields[$image]]);
+    }
+
+    if ($this->getSetting('force_picture')) {
+      $summary[] = $this->t('Forced picture!');
     }
 
     return $summary;
