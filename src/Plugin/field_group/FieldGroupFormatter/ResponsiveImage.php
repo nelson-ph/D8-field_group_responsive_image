@@ -47,10 +47,10 @@ class ResponsiveImage extends FieldGroupFormatterBase {
     }
 
     // Add the HTML classes.
-    $attributes['class'] = $this->getClasses();
+    if(!empty($this->getClasses())){
+      $attributes['class'] = $this->getClasses();
+    }
 
-    // Render the element as a HTML div and add the attributes.
-    $element['#type'] = 'container';
 
     $sources = [];
 
@@ -97,7 +97,12 @@ class ResponsiveImage extends FieldGroupFormatterBase {
 
     }
 
-    $element['#attributes'] = $attributes;
+    if (!empty($attributes->toArray())) {
+      // Render the element as a HTML div and add the attributes.
+      $element['#type']       = 'container';
+      $element['#attributes'] = $attributes;
+    }
+
   }
 
   /**
